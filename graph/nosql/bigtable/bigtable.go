@@ -1,6 +1,7 @@
 package bigtable
 
 import (
+	cbt "cloud.google.com/go/bigtable"
 	"context"
 	"github.com/cayleygraph/cayley/graph"
 	"github.com/cayleygraph/cayley/graph/nosql"
@@ -13,6 +14,7 @@ var (
 )
 
 type DB struct {
+	client *cbt.Client
 }
 
 func (db *DB) Insert(ctx context.Context, col string, key nosql.Key, d nosql.Document) (nosql.Key, error) {
@@ -51,10 +53,13 @@ func init() {
 	})
 }
 
-func Open(string, graph.Options) (nosql.Database, error) {
-
+func Open(addr string, opt graph.Options) (nosql.Database, error) {
+	c, err := cbt.NewClient(context.Background(), "project", "instance", nil)
+	if err != nil {
+		return nil, err
+	}
 }
 
-func Create(string, graph.Options) (nosql.Database, error) {
+func Create(addr string, opt graph.Options) (nosql.Database, error) {
 
 }
