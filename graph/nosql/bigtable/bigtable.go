@@ -5,6 +5,7 @@ import (
 	"context"
 	"github.com/cayleygraph/cayley/graph"
 	"github.com/cayleygraph/cayley/graph/nosql"
+	"google.golang.org/api/option"
 )
 
 const Type = "mongo"
@@ -54,10 +55,13 @@ func init() {
 }
 
 func Open(addr string, opt graph.Options) (nosql.Database, error) {
+	//opts := option.ClientOption{}
+	// DialOption?
 	c, err := cbt.NewClient(context.Background(), "project", "instance", nil)
 	if err != nil {
 		return nil, err
 	}
+
 }
 
 func Create(addr string, opt graph.Options) (nosql.Database, error) {
